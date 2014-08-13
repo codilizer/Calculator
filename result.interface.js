@@ -17,9 +17,9 @@ angular.module('miniCalculator').directive('resultInterface', function() {
             arrItems: '='
         },
         templateUrl: 'result.interface.template.html',
-        link: function(scope, element) {
-
-        }
+//        link: function(scope, element) {
+//
+//        }
     };
 
 });
