@@ -1,3 +1,5 @@
+[ ![Codeship Status for codilizer/Calculator](https://www.codeship.io/projects/be62d0d0-04eb-0132-f4ba-22b7d4028be2/status)](https://www.codeship.io/projects/30756)
+
 [![MEAN.JS Logo](http://meanjs.org/img/logo-small.png)](http://meanjs.org/)
 
 [![Build Status](https://travis-ci.org/meanjs/mean.svg?branch=master)](https://travis-ci.org/meanjs/mean)
