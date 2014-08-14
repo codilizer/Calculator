@@ -8,10 +8,6 @@ angular.module('egghead').config(['$stateProvider',
 		state('assignment01-view', {
 			url: '/assignment01-view',
 			templateUrl: 'modules/egghead/views/assignment01-view.client.view.html'
-		}).
-		state('assignment01-view', {
-			url: '/assignment01view',
-			templateUrl: 'modules/egghead/views/assignment01-view.client.view.html'
-		});
+		})
 	}
 ]);
