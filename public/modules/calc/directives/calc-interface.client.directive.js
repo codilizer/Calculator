@@ -8,7 +8,7 @@ angular.module('calc').directive('calcInterface', function() {
             directiveCalcExpression: '=ctrlExpression',
             calc: "&"
         },
-        templateUrl: 'calc.interface.template.html',
+        templateUrl: '/modules/calc/directives/calc.interface.template.html',
         link: function(scope, element) {
             scope.clickExpBtn = function(event) {
                 //console.log("clikc num!, message:{{message}}");

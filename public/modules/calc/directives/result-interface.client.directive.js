@@ -7,7 +7,7 @@ angular.module('calc').directive('resultInterface', function() {
             addItem: '&',
             arrItems: '='
         },
-        templateUrl: 'result.interface.template.html',
+        templateUrl: '/modules/calc/directives/result.interface.template.html',
 //        link: function(scope, element) {
 //
 //        }
