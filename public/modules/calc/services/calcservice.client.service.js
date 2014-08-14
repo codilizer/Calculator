@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('calc').factory('calcService', [
+angular.module('calc').service('calcService', [
 	function() {
 		// Calcservice service logic
 		// ...
@@ -42,10 +42,10 @@ angular.module('calc').factory('calcService', [
         }
 
 		// Public API
-		return {
-			someMethod: function() {
-				return true;
-			}
-		};
+//		return {
+//			someMethod: function() {
+//				return true;
+//			}
+//		};
 	}
 ]);
