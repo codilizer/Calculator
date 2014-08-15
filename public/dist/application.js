@@ -45,8 +45,12 @@ angular.element(document).ready(function () {
 });'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('articles');'use strict';
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('calc');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');'use strict';
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('egghead');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');'use strict';
 // Configuring the Articles module
@@ -137,6 +141,113 @@ angular.module('articles').factory('Articles', [
     return $resource('articles/:articleId', { articleId: '@_id' }, { update: { method: 'PUT' } });
   }
 ]);'use strict';
+//Setting up route
+angular.module('calc').config([
+  '$stateProvider',
+  function ($stateProvider) {
+    // Calc state routing
+    $stateProvider.state('calculator', {
+      url: '/calculator',
+      templateUrl: 'modules/calc/views/calculator.client.view.html'
+    });
+  }
+]);'use strict';
+angular.module('calc').controller('calcInterfaceCtrl', [
+  '$scope',
+  'calcService',
+  function ($scope, calcService) {
+    $scope.calcExpression = '';
+    $scope.clickNum = function () {
+      console.log('click num! num : ');
+    };
+    $scope.calc = function () {
+      console.log('calc() invoked!');
+      console.log('calcExpression : {{calcExpression}}');
+      calcService.doTest();
+      console.log($scope.calcExpression);
+      calcService.expression = $scope.calcExpression;
+      calcService.doCalc();
+      //calcService.doCalc(calcExpression);
+      $scope.calcExpression = '';
+    };
+  }
+]);'use strict';
+angular.module('calc').controller('calcHistoryCtrl', [
+  '$scope',
+  'calcService',
+  function ($scope, calcService) {
+    $scope.calcResultArr = calcService.arrResultItem;
+  }
+]);'use strict';
+angular.module('calc').directive('calcInterface', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      directiveCalcExpression: '=ctrlExpression',
+      calc: '&'
+    },
+    templateUrl: '/modules/calc/directives/calc.interface.template.html',
+    link: function (scope, element) {
+      scope.clickExpBtn = function (event) {
+        //console.log("clikc num!, message:{{message}}");
+        var inputExp = event.currentTarget.innerHTML;
+        console.log(inputExp);
+        scope.directiveCalcExpression += inputExp;  //scope.directiveCalcExpression = "aaa";
+      };
+      scope.clickEqual = function (scope, element) {
+        console.log('click equal!');
+        scope.calc();
+      };
+    }
+  };
+});'use strict';
+angular.module('calc').directive('resultInterface', function () {
+  return {
+    restrict: 'E',
+    scope: {
+      addItem: '&',
+      arrItems: '='
+    },
+    templateUrl: '/modules/calc/directives/result.interface.template.html'
+  };
+});'use strict';
+angular.module('calc').service('calcService', [function () {
+    // Calcservice service logic
+    // ...
+    this.expression = '';
+    this.arrResultItem = [];
+    this.doCalc = function () {
+      console.log('doCalc() invoked!');
+      var re = /(\+|\-|\*)/;
+      //var input = "1232+232";
+      var input = this.expression;
+      var result = input.split(re);
+      var operator = result[1];
+      var operands = input.split(result[1]);
+      var operandFirst = parseInt(operands[0]);
+      var operandSecond = parseInt(operands[1]);
+      var calcResult;
+      if (operator === '+') {
+        calcResult = operandFirst + operandSecond;
+      } else if (operator === '-') {
+        calcResult = operandFirst - operandSecond;
+      } else if (operator === '*') {
+        calcResult = operandFirst * operandSecond;
+      }
+      var resultItem = input + '=' + calcResult;
+      console.log(resultItem);
+      this.arrResultItem.push(resultItem);
+    };
+    this.doTest = function () {
+      console.log('doTest() invoked!');
+    }  // Public API
+       //		return {
+       //			someMethod: function() {
+       //				return true;
+       //			}
+       //		};
+;
+  }]);'use strict';
 // Setting up route
 angular.module('core').config([
   '$stateProvider',
@@ -313,6 +424,22 @@ angular.module('core').service('Menus', [function () {
     //Adding the topbar menu
     this.addMenu('topbar');
   }]);'use strict';
+//Setting up route
+angular.module('egghead').config([
+  '$stateProvider',
+  function ($stateProvider) {
+    // Egghead state routing
+    $stateProvider.state('assignment01-view', {
+      url: '/assignment01-view',
+      templateUrl: 'modules/egghead/views/assignment01-view.client.view.html'
+    });
+  }
+]);'use strict';
+angular.module('egghead').controller('Assignment01CtrlController', [
+  '$scope',
+  function ($scope) {
+  }
+]);'use strict';
 // Config HTTP Error Handling
 angular.module('users').config([
   '$httpProvider',
