@@ -540,12 +540,27 @@ angular.module('egghead').controller('mainCtrl', [
     }
     $scope.setCurrentCategory = setCurrentCategory;
     $scope.isCurrentCategory = isCurrentCategory;
+    // CRUD
+    function resetCreateForm() {
+      $scope.newBookmark = {
+        title: '',
+        url: '',
+        category: $scope.currentCategory
+      };
+    }
+    function createBookmark(bookmark) {
+      bookmark.id = $scope.bookmarks.length;
+      $scope.bookmarks.push(bookmark);
+      resetCreateForm();
+    }
+    $scope.createBookmark = createBookmark;
     // CREATING AND EDITING STATES
     $scope.isCreating = false;
     $scope.isEditing = false;
     function startCreating() {
       $scope.isCreating = true;
       $scope.isEditing = false;
+      resetCreateForm();
     }
     function cancelCreating() {
       $scope.isCreating = false;
